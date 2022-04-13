@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     public function index()
@@ -25,7 +25,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
         $data = request()->all();
        
@@ -76,6 +76,8 @@ class PostController extends Controller
 
         $postToDelete = Post::find($post);
         $postToDelete->delete();
+        $postToDelete->Comments()->delete();
+
         return redirect()->route('posts.index');
        }
 }
