@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title') Show @endsection
 
@@ -48,8 +48,17 @@
         </h5>
     </div>
 </div>
+
+<div class="card my-4">
+    <div class="card-header fw-bold fs-1">
+        Image
+    </div>
+    <div class="card-body ">
+        <img src="{{$posts['image_path']}}" alt="{{$posts['title']}}" class="img-fluid">
+    </div>
+</div>
 <!-- comments -->
-<h1 class="text-center bg-primary text-light rounded p-4">Comments</h1>
+<h1 class="text-center bg-success text-light rounded p-4">Comments</h1>
 <div>
     <form method="POST" action="{{route('comments.create' , ['postId' => $posts['id']])}}">
         @csrf
@@ -61,7 +70,6 @@
 <div class='mt-4 bg-light text-dark'>
 
     @foreach ($posts->comments as $comment)
-
     <div class='my-4 border p-4 rounded-lg'>
         <h2 class='text-lg fw-bold'>{{$comment->user->name}}</h2>
         <p class='text-lg my-2 fs-2'>{{$comment->body}}</p>
