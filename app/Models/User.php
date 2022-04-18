@@ -21,8 +21,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'github_id',
+        'github_token',
+        'github_refresh_token',
     ];
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
